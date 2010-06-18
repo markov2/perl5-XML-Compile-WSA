@@ -109,9 +109,6 @@ sub wsaNS()   {$versions{shift->{version}}{wsa}}
 
 #-----------
 
-=section Extending SOAP and WSDL
-=cut
-
 sub _load_ns($$)
 {   my ($self, $schema, $fn) = @_;
     my $xsd = File::Spec->catfile(dirname(__FILE__), 'WSA', 'xsd', $fn);
