@@ -20,7 +20,7 @@ use XML::Compile::SOAP::Util  qw/WSDL11 SOAP11HTTP/;
 use XML::Compile::Tester;
 use XML::Compile::SOAP11;
 use XML::Compile::SOAP::WSA;
-use XML::Compile::SOAP::WSA::Util qw/WSDL11WSAW WSA10/;
+use XML::Compile::WSA::Util   qw/WSDL11WSAW WSA10/;
 
 use Test::More tests => 9;
 

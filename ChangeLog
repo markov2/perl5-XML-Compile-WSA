@@ -1,6 +1,17 @@
 
 ===== version history of XML::Compile::SOAP::WSA
 
+version 0.90: Tue Oct  1 13:39:09 CEST 2013
+	Changes:
+	- renamed XML::Compile::SOAP::WSA::Util into XML::Compile::WSA::Util
+	- added XML::Compile::WSA.
+
+	Fixes:
+	- The $wsdl->call can also have a HASH, not only a LIST.
+
+	Improvements:
+	- use ::Cache::addPrefixes()
+
 version 0.13: Sat Oct  6 13:41:11 CEST 2012
 
 	Improvements:

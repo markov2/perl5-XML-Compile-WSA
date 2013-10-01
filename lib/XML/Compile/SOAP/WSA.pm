@@ -6,9 +6,9 @@ use base 'XML::Compile::SOAP::Extension';
 
 use Log::Report 'xml-compile-soap-wsa';
 
-use XML::Compile::SOAP::WSA::Util qw/WSA10MODULE WSA09 WSA10 WSDL11WSAW/;
-use XML::Compile::SOAP::Util      qw/WSDL11/;
-use XML::Compile::Util            qw/pack_type/;
+use XML::Compile::WSA::Util  qw/WSA10MODULE WSA09 WSA10 WSDL11WSAW/;
+use XML::Compile::SOAP::Util qw/WSDL11/;
+use XML::Compile::Util       qw/pack_type/;
 
 use File::Spec              ();
 use File::Basename          qw/dirname/;
@@ -24,6 +24,8 @@ my %versions =
   , '1.0' => { xsd => '20080723-wsa10.xsd', wsa => WSA10
              , hdr => \@wsa10_hdr_elems }
   );
+
+my $xsddir = File::Spec->catdir((dirname dirname __FILE__), 'WSA', 'xsd');
 
 =chapter NAME
 XML::Compile::SOAP::WSA - SOAP Web Service Addressing
@@ -121,8 +123,7 @@ sub XML::Compile::SOAP::Operation::wsaAction($)
 
 sub _load_ns($$)
 {   my ($self, $schema, $fn) = @_;
-    my $xsd = File::Spec->catfile(dirname(__FILE__), 'WSA', 'xsd', $fn);
-    $schema->importDefinitions($xsd);
+    $schema->importDefinitions(File::Spec->catfile($xsddir, $fn));
 }
 
 sub wsdl11Init($$)
@@ -130,7 +131,7 @@ sub wsdl11Init($$)
     my $def = $versions{$self->{version}};
 
     my $ns = $self->wsaNS;
-    $wsdl->prefixes(wsa => $ns, wsaw => WSDL11WSAW);
+    $wsdl->addPrefixes(wsa => $ns, wsaw => WSDL11WSAW);
     $wsdl->addKeyRewrite('PREFIXED(wsa,wsaw)');
 
     trace "loading wsa $self->{version}";
@@ -139,8 +140,9 @@ sub wsdl11Init($$)
 
     my $wsa_action_ns = $self->version eq '0.9' ? $ns : WSDL11WSAW;
     $wsdl->addHook
-      ( type  => pack_type(WSDL11, 'tParam')
-      , after => sub
+      ( action => 'READER'
+      , type   => pack_type(WSDL11, 'tParam')
+      , after  => sub
           { my ($xml, $data, $path) = @_;
             $data->{wsa_action} = $xml->getAttributeNS($wsa_action_ns,'Action');
             return $data;
@@ -193,9 +195,10 @@ sub soap11ClientWrapper($$$)
 
     trace "added wsa in call $to".($action ? " for $action" : '');
     sub
-    {   # wsa:* automatically overridden by explicit values
-        $call->(wsa_To => $to, wsa_Action => $action, @_);
-
+    {   my $data = @_==1 ? shift : {@_};
+        $data->{wsa_To}     ||= $to;
+        $data->{wsa_Action} ||= $action;
+        $call->($data);
         # should we check that the wsa_Action in the reply is correct?
     };
 }

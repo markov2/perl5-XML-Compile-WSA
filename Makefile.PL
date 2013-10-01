@@ -3,13 +3,13 @@ use ExtUtils::MakeMaker;
 use 5.008;
 
 WriteMakefile
- ( NAME	 	=> 'XML::Compile::SOAP::WSA'
- , VERSION	=> '0.13'
+ ( NAME	 	=> 'XML::Compile::WSA'
+ , VERSION	=> '0.90'
 
  , PREREQ_PM    =>
-     { XML::Compile         => '1.28'
+     { XML::Compile         => '1.36'
      , XML::Compile::Tester => '0.06'
-     , XML::Compile::Cache  => '0.96'
+     , XML::Compile::Cache  => '0.995'
      , XML::Compile::SOAP   => '2.30'
      , Log::Report          => '0.28'
 

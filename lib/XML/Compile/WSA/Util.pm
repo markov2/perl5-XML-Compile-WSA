@@ -1,7 +1,7 @@
 use warnings;
 use strict;
 
-package XML::Compile::SOAP::WSA::Util;
+package XML::Compile::WSA::Util;
 use base 'Exporter';
 
 my @wsa09  = qw/WSA09 WSA09FAULT WSA09ROLE_ANON/;
@@ -24,10 +24,10 @@ our %EXPORT_TAGS =
   );
 
 =chapter NAME
-XML::Compile::SOAP::WSA::Util - constants for XML::Compile::SOAP::WSA
+XML::Compile::WSA::Util - constants for XML::Compile::WSA
 
 =chapter SYNOPSYS
- use XML::Compile::SOAP::WSA::Util qw/:wsa10/;
+ use XML::Compile::WSA::Util qw/:wsa10/;
 
 =chapter DESCRIPTION
 This module collects constants used by the Web Service Addressing
