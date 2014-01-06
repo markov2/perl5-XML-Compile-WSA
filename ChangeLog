@@ -1,6 +1,11 @@
 
 ===== version history of XML::Compile::SOAP::WSA
 
+version 0.92: Mon Jan  6 10:40:29 CET 2014
+
+	Fixes:
+	- depends on WSDL11 [cpantesters]
+
 version 0.91: Mon Jan  6 01:05:54 CET 2014
 
 	Improvements:
