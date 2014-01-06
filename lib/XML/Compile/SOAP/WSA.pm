@@ -62,9 +62,16 @@ This works both for soap clients (created with M<XML::Compile::SOAP>)
 as for the soap server (created with M<XML::Compile::SOAP::Daemon>):
 simply require the WSA module to get the hooks installed.
 
-B<Warning:> this being a very recent module, thing may not work. There
-is no real-life experience with the code, as yet. Please contact the
-author when you are succesful or discovered problems.
+Supported fields:
+
+  Action
+  FaultTo
+  From
+  MessageID
+  RelatesTo
+  ReplyTo
+  RetryAfter
+  To
 
 =chapter METHODS
 
@@ -110,9 +117,10 @@ Returns the namespace used for this WSA version.
 sub version() {shift->{version}}
 sub wsaNS()   {$versions{shift->{version}}{wsa}}
 
-# This is not uglier than the WSA etension does: if you do not
-# specify these attributes explicitly, everyone needs hacks.
-# documented in XML::Compile::SOAP::Operation
+# This is not uglier than the WSA specification does: if you do not
+# specify these attributes cleanly in the WSDL specs, then everyone
+# needs hacks.
+# Documented in XML::Compile::SOAP::Operation
 
 sub XML::Compile::SOAP::Operation::wsaAction($)
 {  my ($self, $dir) = @_;
@@ -186,6 +194,7 @@ sub soap11OperationInit($$)
     # soap11 specific
     $op->addHeader(OUTPUT => wsa_FaultDetail => "{$ns}FaultDetail");
 }
+*soap12OperationInit = \&soap11OperationInit;
 
 sub soap11ClientWrapper($$$)
 {   my ($self, $op, $call, $args) = @_;
@@ -202,6 +211,7 @@ sub soap11ClientWrapper($$$)
         # should we check that the wsa_Action in the reply is correct?
     };
 }
+*soap12ClientWrapper = \&soap11ClientWrapper;
 
 sub soap11HandlerWrapper($$$)
 {   my ($self, $op, $cb, $args) = @_;
@@ -215,6 +225,7 @@ sub soap11HandlerWrapper($$$)
         $data;
     };
 }
+*soap12HandlerWrapper = \&soap11HandlerWrapper;
 
 =section SEE ALSO
 =over 4
