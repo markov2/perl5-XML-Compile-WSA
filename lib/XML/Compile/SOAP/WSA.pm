@@ -77,7 +77,7 @@ Supported fields:
 
 =section Constructors
 
-=c_method new OPTIONS
+=c_method new %options
 
 =requires version '0.9'|'1.0'|MODULE
 Explicitly state which version WSA needs to be produced.

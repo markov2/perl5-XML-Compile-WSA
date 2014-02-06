@@ -1,6 +1,11 @@
 
 ===== version history of XML::Compile::SOAP::WSA
 
+version 0.93: Thu Feb  6 17:10:45 CET 2014
+
+	Improvements:
+	- change documentation style.
+
 version 0.92: Mon Jan  6 10:40:29 CET 2014
 
 	Fixes:
