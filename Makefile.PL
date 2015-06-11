@@ -4,10 +4,10 @@ use 5.008;
 
 WriteMakefile
  ( NAME	 	=> 'XML::Compile::WSA'
- , VERSION	=> '0.93'
+ , VERSION	=> '0.94'
 
  , PREREQ_PM    =>
-     { XML::Compile         => '1.36'
+     { XML::Compile         => '1.49'
      , XML::Compile::Tester => '0.06'
      , XML::Compile::Cache  => '0.995'
      , XML::Compile::SOAP   => '3.00'

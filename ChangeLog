@@ -1,5 +1,11 @@
 
-===== version history of XML::Compile::SOAP::WSA
+===== version history of XML::Compile::WSA
+
+version 0.94: Thu Jun 11 09:41:04 CEST 2015
+
+	Fixes:
+	- be aware that some other modules may take "any"s.  Only doable
+	  by enforcing taking anyElement myself.
 
 version 0.93: Thu Feb  6 17:10:45 CET 2014
 

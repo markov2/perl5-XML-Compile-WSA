@@ -142,6 +142,11 @@ sub wsdl11Init($$)
     $wsdl->addPrefixes(wsa => $ns, wsaw => WSDL11WSAW);
     $wsdl->addKeyRewrite('PREFIXED(wsa,wsaw)');
 
+    $wsdl->addCompileOptions('READERS'
+      , anyElement   => 'TAKE_ALL'
+      , anyAttribute => 'TAKE_ALL'
+      );
+
     trace "loading wsa $self->{version}";
     $self->_load_ns($wsdl, $def->{xsd});
     $self->_load_ns($wsdl, '20060512-wsaw.xsd');
@@ -153,7 +158,22 @@ sub wsdl11Init($$)
       , after  => sub
           { my ($xml, $data, $path) = @_;
             $data->{wsa_action} = $xml->getAttributeNS($wsa_action_ns,'Action');
-            return $data;
+            $data;
+          }
+      );
+
+    # [0.94] Many headers may contain attributes (which are usually not auto-
+    # detected anyway), which will cause the field to be a HASH.  Older
+    # versions of this module would always simply return the content, not a
+    # HASH.  Let's not break those.
+    $wsdl->addHook
+      ( action => 'READER'
+      , type   => 'wsa:AttributedURIType'
+      , after  => sub
+          { my ($xml, $data, $path) = @_;
+            $data = $data->{_}
+                if ref $data eq 'HASH' && keys %$data==1 && $data->{_};
+            $data;
           }
       );
 

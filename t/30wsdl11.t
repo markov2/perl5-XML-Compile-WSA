@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 # Check whether the wsaAction is correctly taken from the WSDL11
 # file.
 
@@ -21,6 +21,8 @@ use XML::Compile::Tester;
 use XML::Compile::SOAP11;
 use XML::Compile::SOAP::WSA;
 use XML::Compile::WSA::Util   qw/WSDL11WSAW WSA10/;
+
+use XML::Compile::SOAP11::Encoding;   # XXX bug-report test only
 
 use Test::More tests => 9;
 
