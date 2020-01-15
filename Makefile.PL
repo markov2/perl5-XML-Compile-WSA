@@ -4,7 +4,7 @@ use 5.010;
 
 WriteMakefile
  ( NAME	 	=> 'XML::Compile::WSA'
- , VERSION	=> '0.95'
+ , VERSION	=> '0.96'
 
  , PREREQ_PM    =>
      { XML::Compile         => '1.49'
