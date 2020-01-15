@@ -1,8 +1,12 @@
-use warnings;
-use strict;
+# This code is part of distribution XML-Compile-WSA.  Meta-POD processed
+# with OODoc into POD and HTML manual-pages.  See README.md
+# Copyright Mark Overmeer.  Licensed under the same terms as Perl itself.
 
 package XML::Compile::WSA::Util;
 use base 'Exporter';
+
+use warnings;
+use strict;
 
 my @wsa09  = qw/WSA09 WSA09FAULT WSA09ROLE_ANON/;
 my @wsa10  = qw/WSA10 WSA10FAULT WSA10ADDR_ANON WSA10ADDR_NONE
@@ -26,7 +30,7 @@ our %EXPORT_TAGS =
 =chapter NAME
 XML::Compile::WSA::Util - constants for XML::Compile::WSA
 
-=chapter SYNOPSYS
+=chapter SYNOPSIS
  use XML::Compile::WSA::Util qw/:wsa10/;
 
 =chapter DESCRIPTION

@@ -1,6 +1,7 @@
 ChangeLog
 MANIFEST
 Makefile.PL
+README.md
 lib/XML/Compile/SOAP/WSA.pm
 lib/XML/Compile/WSA.pm
 lib/XML/Compile/WSA/Util.pm

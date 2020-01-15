@@ -1,8 +1,12 @@
-use warnings;
-use strict;
+# This code is part of distribution XML-Compile-WSA.  Meta-POD processed
+# with OODoc into POD and HTML manual-pages.  See README.md
+# Copyright Mark Overmeer.  Licensed under the same terms as Perl itself.
 
 package XML::Compile::SOAP::WSA;
 use base 'XML::Compile::SOAP::Extension';
+
+use warnings;
+use strict;
 
 use Log::Report 'xml-compile-soap-wsa';
 
